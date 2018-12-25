@@ -1,3 +1,15 @@
-h1 {
-  text-align: center;
+.app-box {
+  padding: 20px;
+
+  & h1 {
+    text-align: center;
+  }
+
+  & :local(.avatarArea) {
+    text-align: center;
+
+    & h2 {
+      text-shadow: 2px 2px 1px #ccc;
+    }
+  }
 }

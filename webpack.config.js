@@ -8,12 +8,27 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: 'global',
+              localIdentName: '[local]__[hash:base64:6]',
+              importLoaders: 1,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+          },
+        ],
       },
       {
         test: /\.(jpg|jpeg|png|gif|webp)$/,
@@ -24,31 +39,31 @@ module.exports = {
             fallback: {
               loader: 'file-loader',
               options: {
-                name: 'img/[name].[hash:8].[ext]'
-              }
-            }
-          }
-        }
+                name: 'img/[name].[hash:8].[ext]',
+              },
+            },
+          },
+        },
       },
       {
         test: /\.svg$/,
         use: {
           loader: 'file-loader',
           options: {
-            name: 'img/[name].[hash:8].[ext]'
-          }
-        }
-      }
-    ]
+            name: 'img/[name].[hash:8].[ext]',
+          },
+        },
+      },
+    ],
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: './src/index.html'
-    })
+      template: './src/index.html',
+    }),
   ],
   resolve: {
     alias: {
-      '@': path.join(__dirname, 'src')
-    }
-  }
+      '@': path.join(__dirname, 'src'),
+    },
+  },
 };
